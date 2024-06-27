@@ -8,31 +8,6 @@ Neste documento estão contidos os principais comandos para configurar/instalar/
 
 _This document contains the main commands for configuring/installing/use `zsh` on `Linux Ubuntu`._
 
-## Revisão(ões)/Versão(ões)
-
-| Revisão número | Data da revisão | Descrição da revisão                                    | Autor da revisão                                |
-|:--------------:|:---------------:|:--------------------------------------------------------|:------------------------------------------------|
-| 0              | 07/12/2023      | <ul><li>Revisão inicial/criação do documento.</li></ul> | <ul><li>Eden Denis F. da S. L. Santos</ul></li> |
-
-
-## Controle de configuração/instalação nos Sistemas Operacionais (SO) vs. Computador
-
-| Número | Computador          | Sistema Operacional (SO) | Status da configuração/instalação |
-|:------:|:-------------------:|:------------------------:|:---------------------------------:|
-| 1      | Dell Precision 7520 |Kali Linux                | N/A                               |
-| 2      | Dell Precision 7520 |Linux Ubuntu              | N/A                               |
-| 3      | Dell Precision 7520 |Linux Xubuntu             | OK                                |
-| 4      | Dell Precision 7520 |Windows                   | Pendente                          |
-| 5      | Asus                |Kali Linux                | N/A                               |
-| 6      | Asus                |Linux Ubuntu              | Pendente                          |
-| 7      | Asus                |Linux Xubuntu             | OK                                |
-| 8      | Asus                |Windows                   | Pendente                          |
- 
-### Legenda
-
-- **N/A:** Not applicable
-- **OK:** Zero killed
-
 ## Descrição [2]
 
 ### `shell`
@@ -47,6 +22,17 @@ Bash, ou Bourne Again Shell, é um shell de linha de comando amplamente utilizad
 
 O `zsh`, ou Z Shell, é um interpretador de `shell` de código aberto e uma alternativa avançada ao bash (Bourne Again Shell), que é comumente usado em sistemas Unix e Linux. O `zsh` oferece uma série de recursos avançados, como autocompletamento poderoso, histórico de comandos expandido, personalização flexível da aparência e do comportamento do `shell`, além de suporte a plugins e temas. Sua interface de linha de comando aprimorada e recursos de automação tornam-no uma escolha popular entre desenvolvedores, administradores de sistema e entusiastas de terminal que desejam uma experiência de linha de comando mais produtiva e personalizável. O `zsh` é altamente configurável e pode ser estendido por meio de plugins, tornando-o uma ferramenta versátil para trabalhar com eficiência no ambiente Unix e Linux.
 
+### `zsh-completions`
+
+O `zsh-completions` é um plugin para o shell `zsh` que sugere automaticamente comandos com base no histórico de entrada do usuário. Ele funciona destacando uma sugestão na linha de comando, baseada no que o usuário começou a digitar, facilitando a reutilização de comandos anteriores de maneira eficiente. Isso não apenas economiza tempo, mas também reduz erros ao lembrar comandos frequentemente usados.
+
+### `zsh-completions`
+
+O `zsh-completions` é um conjunto de scripts de conclusão automática para o shell `zsh`, projetado para melhorar a experiência do usuário ao fornecer conclusões detalhadas e precisas para comandos, argumentos de comandos e opções. Ele amplia significativamente a funcionalidade do shell `zsh`, permitindo que os usuários completem rapidamente comandos complexos e evitem erros de sintaxe, aumentando assim a eficiência na linha de comando.
+
+### `fast-syntax-highlighting`
+
+O `fast-syntax-highlighting` é um plugin para o shell fish que oferece realce de sintaxe rápido e responsivo para comandos e scripts. Ele melhora a experiência do usuário ao proporcionar cores distintas para diferentes elementos de linguagem, facilitando a leitura e a compreensão de código diretamente no terminal. Essa funcionalidade ajuda os usuários a identificar erros de sintaxe mais rapidamente e a escrever scripts de forma mais eficiente no shell `fish`.
 
 
 ## 1. Como configurar/instalar/usar o `zsh` no `Linux Ubuntu` [1][3]
@@ -57,21 +43,22 @@ Para configurar/instalar/usar o `zsh` no `Linux Ubuntu`, você pode seguir estes
 
 2. Certifique-se de que seu sistema esteja limpo e atualizado.
 
-    2.1 Limpar o `cache` do gerenciador de pacotes APT. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo APT e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando: `sudo apt clean` 
+    2.1 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando: `sudo apt clean` 
     
     2.2 Remover pacotes `.deb` antigos ou duplicados do cache local. É útil para liberar espaço, pois remove apenas os pacotes que não podem mais ser baixados (ou seja, versões antigas de pacotes que foram atualizados). Digite o seguinte comando: `sudo apt autoclean`
 
     2.3 Remover pacotes que foram automaticamente instalados para satisfazer as dependências de outros pacotes e que não são mais necessários. Digite o seguinte comando: `sudo apt autoremove -y`
 
-    2.4 Buscar as atualizações disponíveis para os pacotes que estão instalados em seu sistema. Digite o seguinte comando e pressione `Enter`: `sudo apt update -y`
+    2.4 Buscar as atualizações disponíveis para os pacotes que estão instalados em seu sistema. Digite o seguinte comando e pressione `Enter`: `sudo apt update`
 
-    2.5 Para ver a lista de pacotes a serem atualizados, digite o seguinte comando e pressione `Enter`:  `sudo apt list --upgradable`
+    2.5 **Corrigir pacotes quebrados**: Isso atualizará a lista de pacotes disponíveis e tentará corrigir pacotes quebrados ou com dependências ausentes: `sudo apt --fix-broken install`
 
-    2.6 Realmente atualizar os pacotes instalados para as suas versões mais recentes, com base na última vez que você executou `sudo apt update -y`. Digite o seguinte comando e pressione `Enter`: `sudo apt full-upgrade -y`
+    2.6 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando: `sudo apt clean` 
+    
+    2.7 Para ver a lista de pacotes a serem atualizados, digite o seguinte comando e pressione `Enter`:  `sudo apt list --upgradable`
 
-    2.7 Remover pacotes que foram automaticamente instalados para satisfazer as dependências de outros pacotes e que não são mais necessários. Digite o seguinte comando: `sudo apt autoremove -y`
-
-    2.8 Remover pacotes `.deb` antigos ou duplicados do cache local. É útil para liberar espaço, pois remove apenas os pacotes que não podem mais ser baixados (ou seja, versões antigas de pacotes que foram atualizados). Digite o seguinte comando: `sudo apt autoclean`
+    2.8 Realmente atualizar os pacotes instalados para as suas versões mais recentes, com base na última vez que você executou `sudo apt update`. Digite o seguinte comando e pressione `Enter`: `sudo apt full-upgrade -y`
+    
 
 Para configurar/instalar/usar o `zsh` em um sistema `Linux Ubuntu`, você pode seguir estes passos:
 
@@ -333,8 +320,8 @@ Para configurar/instalar/usar o `zsh` em um sistema `Linux Ubuntu`, você pode s
     alias l='ls -CF'
 
     # enable auto-suggestions based on the history
-    if [ -f /usr/$USER/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-        . /usr/$USER/zsh-autosuggestions/zsh-autosuggestions.zsh
+    if [ -f /usr/$USER/zsh-completions/zsh-completions.zsh ]; then
+        . /usr/$USER/zsh-completions/zsh-completions.zsh
         # change suggestion color
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
     fi
@@ -360,8 +347,10 @@ Para configurar/instalar/usar o `zsh` em um sistema `Linux Ubuntu`, você pode s
     # <<< conda initialize <<<
     conda activate base
 
-    plugins=(git sudo zsh-autosuggestions)
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+    plugins=(git sudo zsh-completions)
+    source ~/.zsh/zsh-completions/zsh-completions.zsh
+    source ~/.zsh/zsh-completions/zsh-completions.zsh
+    source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
     ```
 
     **ATENÇÃO:** Perceber que, o `conda initialize` está inserido no código. Sendo assim, inicialmente deve ser instalado o `anaconda` e talvez o nome do usuário, neste caso `$USER` tenha que ser alterado.
@@ -369,11 +358,11 @@ Para configurar/instalar/usar o `zsh` em um sistema `Linux Ubuntu`, você pode s
 
 ### 1.1 Configurar o `zsh` como seu `shell` padrão
 
-1. **Configurar o `zsh` como seu `shell` Padrão:** Para configurar o `zsh` como seu ``shell`` padrão, use (NÃO colocar o `sudo`!): `chsh -s $(which zsh)`
+1. **Configurar o `zsh` como seu `shell` Padrão:** Para configurar o `zsh` como seu `shell` padrão, use (**NÃO** colocar o `sudo`!): `chsh -s $(which zsh)`
 
     - Você precisará fazer logout e login novamente para que a mudança tenha efeito.
 
-2. **Criar o Arquivo .`zshrc`:** Se, por algum motivo, o arquivo `.zshrc` não for criado automaticamente, você pode criá-lo manualmente: `sudo nano ~/.zshrc`
+2. **Criar o Arquivo .`zshrc`:** Se, por algum motivo, o arquivo `.zshrc` **NÃO** for criado automaticamente, você pode criá-lo manualmente: `sudo nano ~/.zshrc`
 
     - Adicione as configurações que deseja e salve o arquivo.
 
@@ -394,7 +383,7 @@ Esses passos devem ajudar a configurar o `zsh` com o tema e os plugins desejados
 
     3.1 Em `Background` altere a opção para `Transparent background`
 
-    3.2 Em `Opacity` coloque em `0,85`
+    3.2 Em `Opacity` coloque em `0.85`
 
 4. Clique na aba `Colors`
 
@@ -423,11 +412,11 @@ Para configurar/instalar/usar o `zsh` no `Linux Ubuntu` sem precisar digitar lin
     ```
 
 
-## 2. Habilitar o `autosuggestions` (auto-sugestões ou auto-completar) no `zsh`
+## 2. Habilitar o `zsh-autosuggestions` (auto-sugestões ou auto-completar) no `zsh`
 
 O recurso que você está descrevendo é conhecido como `autosuggestions` (auto-sugestões ou auto-completar), que exibe comandos anteriores que você digitou que começam com o que você está digitando atualmente. No `zsh`, isso geralmente é realizado pelo plugin `zsh-autosuggestions`, você pode instalar o plugin manualmente.
 
-Aqui estão as etapas para instalar o plugin `zsh-autosuggestions` sem usar o Oh My `zsh`:
+Aqui estão as etapas para instalar o plugin `zsh-autosuggestions` sem usar o `Oh My Zsh`:
 
 1. **Clone o Repositório do Plugin:** Abra um terminal e execute o seguinte comando para clonar o plugin para o diretório de plugins do `zsh`: `git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions`
 
@@ -438,7 +427,7 @@ Aqui estão as etapas para instalar o plugin `zsh-autosuggestions` sem usar o Oh
     ```
     plugins=(git sudo zsh-autosuggestions)
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ``````
+    ```
 
 4. **Configure as Cores das Sugestões (opcional):** Se você quiser personalizar a cor das sugestões para que sejam mais claras ou correspondam ao seu esquema de cores do terminal, adicione o seguinte ao seu `.zshrc`: `ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'`
 
@@ -453,9 +442,74 @@ Após realizar esses passos, quando você começar a digitar um comando no termi
 Espero que isso ajude a configurar as auto-sugestões no seu terminal `zsh`. Se você encontrar algum problema, certifique-se de que o caminho para o script `zsh-autosuggestions`.zsh está correto e que o plugin foi clonado para o local correto.
 
 Se você estiver usando o `bash` e quiser um recurso similar, você precisaria de uma configuração diferente, já que o `zsh-autosuggestions` é específico para o `zsh`. No `bash`, o recurso mais próximo é o `history search`, que pode ser habilitado com algumas configurações no arquivo `.bashrc`.
+m
+
+## 3. Habilitar o `zsh-completions` (conclusão automática) no `zsh`
+
+O plugin zsh-completions melhora a conclusão automática no zsh ao oferecer uma gama mais ampla de sugestões com base nos comandos e parâmetros disponíveis, diferentemente das auto-sugestões que se baseiam em histórico de comandos.
+
+Aqui estão as etapas para instalar o plugin `zsh-completions` sem usar o `Oh My Zsh`:
+
+1. **Clone o Repositório do Plugin:** Abra um terminal e execute o seguinte comando para clonar o plugin para o diretório de plugins do `zsh`: `git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-autosuggestions`
+
+2. **Adicione o Plugin ao Seu Arquivo `.zshrc`:** Você precisará adicionar uma linha ao seu arquivo `.zshrc` para carregar o plugin. Abra o arquivo `.zshrc` com um editor de texto: `sudo nano ~/.zshrc`
+
+3. **E adicione a seguinte linha no final do arquivo:**
+
+    ```
+    plugins=(git sudo zsh-completions)
+    source ~/.zsh/zsh-completions/zsh-completions.zsh
+    ```
+
+4. **Configure as Cores das Sugestões (opcional):** Se você quiser personalizar a cor das sugestões para que sejam mais claras ou correspondam ao seu esquema de cores do terminal, adicione o seguinte ao seu `.zshrc`: `zstyle ':completion:*' list-colors 'fg=10'`
+
+    Ajuste o valor `'fg=10'` (compatível com o esquema de cores `Tango`) para a cor desejada conforme as configurações do seu terminal.
+
+5. **Recarregue o Seu Arquivo `.zshrc`:** Depois de salvar suas alterações, você pode recarregar o arquivo de configuração com: `source ~/.zshrc`
+
+6. **Verifique se Está Funcionando:** Após recarregar o arquivo `.zshrc`, comece a digitar um comando que você usou anteriormente. As sugestões devem aparecer automaticamente.
+
+Após realizar esses passos, quando você começar a digitar um comando no terminal, o plugin `zsh-completions` mostrará sugestões com base nos seus comandos anteriores, com a sugestão exibida em uma cor mais clara. Você pode aceitar a sugestão pressionando a tecla de seta para a direita.
+
+Espero que isso ajude a configurar as auto-sugestões no seu terminal `zsh`. Se você encontrar algum problema, certifique-se de que o caminho para o script `zsh-completions`.zsh está correto e que o plugin foi clonado para o local correto.
+
+Se você estiver usando o `bash` e quiser um recurso similar, você precisaria de uma configuração diferente, já que o `zsh-completions` é específico para o `zsh`. No `bash`, o recurso mais próximo é o `history search`, que pode ser habilitado com algumas configurações no arquivo `.bashrc`.
 
 
-## 3. Alterar o símbolo que aparece entre o nome de usuário e o `host`
+## 3. Habilitar o `fast-syntax-highlighting` (realce) no `zsh`
+
+`fast-syntax-highlighting` é um plugin para o zsh que melhora a visualização do terminal ao destacar a sintaxe dos comandos conforme são digitados. Isso ajuda a identificar erros e entender melhor os comandos.
+
+Aqui estão as etapas para instalar o plugin `fast-syntax-highlighting` sem usar o `Oh My Zsh`:
+
+1. **Clone o Repositório do Plugin:** Abra um terminal e execute o seguinte comando para clonar o plugin para o diretório de plugins do `zsh`: `git clone https://github.com/zdharma/fast-syntax-highlighting.git ~/.zsh/zsh-autosuggestions`
+
+2. **Adicione o Plugin ao Seu Arquivo `.zshrc`:** Você precisará adicionar uma linha ao seu arquivo `.zshrc` para carregar o plugin. Abra o arquivo `.zshrc` com um editor de texto: `sudo nano ~/.zshrc`
+
+3. **E adicione a seguinte linha no final do arquivo:**
+
+    ```
+    FAST_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+    FAST_HIGHLIGHT_STYLES[command]='fg=green,bold'
+    FAST_HIGHLIGHT_STYLES[path]='fg=blue'
+    ```
+
+4. **Configure as Cores das Sugestões (opcional):** Se você quiser personalizar a cor das sugestões para que sejam mais claras ou correspondam ao seu esquema de cores do terminal, adicione o seguinte ao seu `.zshrc`: `ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'`
+
+    Ajuste o valor `'fg=10'` (compatível com o esquema de cores `Tango`) para a cor desejada conforme as configurações do seu terminal.
+
+5. **Recarregue o Seu Arquivo `.zshrc`:** Depois de salvar suas alterações, você pode recarregar o arquivo de configuração com: `source ~/.zshrc`
+
+6. **Verifique se Está Funcionando:** Após recarregar o arquivo `.zshrc`, comece a digitar um comando que você usou anteriormente. As sugestões devem aparecer automaticamente.
+
+Após realizar esses passos, quando você começar a digitar um comando no terminal, o plugin `fast-syntax-highlighting` mostrará sugestões com base nos seus comandos anteriores, com a sugestão exibida em uma cor mais clara. Você pode aceitar a sugestão pressionando a tecla de seta para a direita.
+
+Espero que isso ajude a configurar as auto-sugestões no seu terminal `zsh`. Se você encontrar algum problema, certifique-se de que o caminho para o script `fast-syntax-highlighting`.zsh está correto e que o plugin foi clonado para o local correto.
+
+Se você estiver usando o `bash` e quiser um recurso similar, você precisaria de uma configuração diferente, já que o `zsh-completions` é específico para o `zsh`. No `bash`, o recurso mais próximo é o `history search`, que pode ser habilitado com algumas configurações no arquivo `.bashrc`.
+
+
+## 5. Alterar o símbolo que aparece entre o nome de usuário e o `host`
 
 Para alterar o símbolo que aparece entre o seu nome de usuário e o nome do `host` no seu prompt do `zsh`, você precisará modificar a variável `PROMPT` (ou `PS1` em alguns casos) no seu arquivo `.zshrc`.
 
@@ -496,7 +550,7 @@ Para alterar o símbolo que aparece entre o seu nome de usuário e o nome do `ho
     Ou simplesmente fechar e reabrir o terminal.
 
 
-## 5. Mudar o seu `shell` de volta para o `bash` (ou outro `shell` de sua preferência) com o comando:
+## 6. Mudar o seu `shell` de volta para o `bash` (ou outro `shell` de sua preferência) com o comando:
 
 1. Finalmente, mude o seu `shell` de volta para o `bash` (ou outro `shell` de sua preferência) com o comando: `sudo chsh -s /bin/bash`
 
@@ -505,7 +559,7 @@ Para alterar o símbolo que aparece entre o seu nome de usuário e o nome do `ho
 2. **Iniciar o `bash` Manualmente:** Caso NÃO funcione, como solução temporária, você pode iniciar o `bash` manualmente em um terminal do `zsh`, simplesmente digitando bash. Isso não muda seu `shell` padrão, mas inicia uma sessão do `bash` naquele terminal específico.
 
 
-## 6. Alterar a opacidade/transparência do `Terminal Emulator`
+## 7. Alterar a opacidade/transparência do `Terminal Emulator`
 
 A referência específica à transparência padrão do terminal no `Kali Linux` não é mencionada diretamente nas fontes. No entanto, uma prática comum é definir a transparência do painel do terminal para cerca de `5%`, para dar uma aparência estilizada, como mencionado em um guia de personalização do ambiente de desktop `xfce` no `Kali Linux​​`. Isso indica que a transparência padrão pode ser definida para um valor baixo ou até mesmo desativada por padrão, com a opção de ajuste conforme a preferência do usuário.
 
@@ -521,18 +575,18 @@ No entanto, se você deseja ajustar ou verificar a transparência do seu termina
 
 7. Desinstalar o `shell` `zsh`
 
-Para desinstalar o zsh e limpar as configurações no Ubuntu pelo terminal, você pode seguir estes passos:
+Para desinstalar o `zsh` e limpar as configurações no Ubuntu pelo terminal, você pode seguir estes passos:
 
 1. **Desinstalar o `zsh`:** `sudo apt remove --purge zsh`
 
 2. **Remover as configurações pessoais:** Apague o diretório de configuração do `zsh` no seu diretório `home`: `rm -rf ~/.zsh ~/.zshrc`
 
-3. **Mudar o `shell` padrão de volta para o `bash`: Para voltar para o `bash` como seu `shell` padrão, execute: `chsh -s /bin/bash`
+3. **Mudar o `shell` padrão de volta para o `bash`**: Para voltar para o `bash` como seu `shell` padrão, execute: `chsh -s /bin/bash`
 
 Lembre-se de que você precisará fechar e reabrir o terminal ou reiniciar a sessão para que as alterações entrem em vigor. Isso removerá o zsh e suas configurações do seu sistema.
 
 
-## 7. Desinstalar o `zsh`
+## 8. Desinstalar o `zsh`
 
 Para desinstalar completamente o `zsh` no `Linux Ubuntu`, você precisa seguir algumas etapas. Primeiro, é importante remover o pacote `zsh` em si e, em seguida, alterar o `shell` padrão para o usuário de volta ao `shell` anterior (geralmente `bash`), caso o `zsh` tenha sido configurado como o `shell` padrão. Aqui estão as etapas detalhadas:
 
